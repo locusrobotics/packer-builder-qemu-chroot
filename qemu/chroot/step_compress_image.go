@@ -29,7 +29,7 @@ func (s *StepCompressImage) Run(_ context.Context, state multistep.StateBag) mul
 	ui.Say("Compressing image...")
 	tmpPath := imagePath + ".tmp"
 
-	cmd := fmt.Sprintf("qemu-img convert -c -O qcow2 %s %s", imagePath, tmpPath)
+	cmd := fmt.Sprintf("qemu-img convert -c -t writeback -O qcow2 %s %s", imagePath, tmpPath)
 	cmd, err := wrappedCommand(cmd)
 	if err != nil {
 		err := fmt.Errorf("Error creating compression command: %s", err)
